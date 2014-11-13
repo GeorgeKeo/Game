@@ -20,7 +20,8 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    private Room jitteryJoes, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11;
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -35,31 +36,57 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
-      
+        Room jitteryJoes, theater, pub, lab, office;
+
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
+        jitteryJoes = new Room("jitteryJoes");
+        room2 = new Room("in a lecture theater");
+        room3 = new Room("in a lecture theater");
+        room4 = new Room("in a lecture theater");
+        room5 = new Room("in a lecture theater");
+        room6 = new Room("in a lecture theater");
+        room7 = new Room("in a lecture theater");
+        room8 = new Room("in a lecture theater");
+        room9 = new Room("in a lecture theater");
+        room10 = new Room("in a lecture theater");
+        room11 = new Room("in a lecture theater");
+        
+
         office = new SpecialRoomOffice("in the computing admin office" +
             ".  There is a button on the desk.");
-        
+
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        jitteryJoes.setExit("north", room2);
+        jitteryJoes.setExit("south", room5);
 
-        theater.setExit("west", outside);
+        room2.setExit("south", jitteryJoes);
+        room2.setExit("west", room7);
+        room2.setExit("east", room3);
 
-        pub.setExit("east", outside);
+        room7.setExit("south", room8);
+        room7.setExit("east", room2);
+        room4.setExit("north", room9);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+        room3.setExit("west", room2);
+        room3.setExit("east", room4);
 
-        office.setExit("west", lab);
+        room4.setExit("west", room3);
 
-        currentRoom = outside;  // start game outside
+        room5.setExit("north", jitteryJoes);
+        room5.setExit("south", room6);
+
+        room6.setExit("north", room5);
+
+        room8.setExit("north", room7);
+        
+        room9.setExit("north", room10);
+        room9.setExit("south", room8);
+        
+        room10.setExit("north", room11);
+
+       
+
+        currentRoom = jitteryJoes;  // start game jitteryJoes
     }
 
     /**
@@ -71,7 +98,7 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
@@ -182,9 +209,5 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
-    
-    private void nothing2()
-    {
-        
-    }
+
 }
