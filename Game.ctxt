@@ -22,7 +22,12 @@ comment6.target=void\ goRoom(Command)
 comment6.text=\ \r\n\ Try\ to\ in\ to\ one\ direction.\ If\ there\ is\ an\ exit,\ enter\ the\ new\r\n\ room,\ otherwise\ print\ an\ error\ message.\r\n
 comment7.params=command
 comment7.target=boolean\ quit(Command)
+<<<<<<< Updated upstream
 comment7.text=\ \r\n\ "Quit"\ was\ entered.\ Check\ the\ rest\ of\ the\ command\ to\ see\r\n\ whether\ we\ really\ quit\ the\ game.\r\n\ @return\ true,\ if\ this\ command\ quits\ the\ game,\ false\ otherwise.\r\n
 comment8.params=
 comment8.target=void\ nothing2()
 numComments=9
+=======
+comment7.text=\ \n\ "Quit"\ was\ entered.\ Check\ the\ rest\ of\ the\ command\ to\ see\n\ whether\ we\ really\ quit\ the\ game.\n\ @return\ true,\ if\ this\ command\ quits\ the\ game,\ false\ otherwise.\n
+numComments=8
+>>>>>>> Stashed changes

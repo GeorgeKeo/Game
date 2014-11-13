@@ -27,11 +27,19 @@ dependency9.from=Game
 dependency9.to=SpecialRoomOffice
 dependency9.type=UsesDependency
 objectbench.height=76
+<<<<<<< Updated upstream
 objectbench.width=917
 package.editor.height=500
 package.editor.width=819
 package.editor.x=81
 package.editor.y=97
+=======
+objectbench.width=620
+package.editor.height=586
+package.editor.width=518
+package.editor.x=640
+package.editor.y=22
+>>>>>>> Stashed changes
 package.numDependencies=9
 package.numTargets=6
 package.showExtends=true
@@ -41,10 +49,10 @@ readme.editor.height=666
 readme.editor.width=839
 readme.editor.x=0
 readme.editor.y=22
-target1.editor.height=619
-target1.editor.width=780
-target1.editor.x=0
-target1.editor.y=128
+target1.editor.height=725
+target1.editor.width=640
+target1.editor.x=640
+target1.editor.y=22
 target1.height=60
 target1.name=Game
 target1.naviview.expanded=true
