@@ -1,27 +1,26 @@
 /**
- * TEST GIT HUB
- *  This class is the main class of the "World of Zuul" application. 
- *  "World of Zuul" is a very simple, text based adventure game.  Users 
- *  can walk around some scenery. That's all. It should really be extended 
- *  to make it more interesting!
+ *
+ * GATOR HATERS
+ * -The Dragons
  * 
- *  To play this game, create an instance of this class and call the "play"
- *  method.
+ * Mashfik Ahmed, George Keohavong, Mike Burruss
  * 
- *  This main class creates and initialises all the others: it creates all
- *  rooms, creates the parser and starts the game.  It also evaluates and
- *  executes the commands that the parser returns.
+ * This game is about a character who wakes up in the middle of the University of Georgia campus and realizes that everyone has slowly turned into zombies.
+ * He finds out that this has occurred because a villianous coach at the University of Florida has a machine that 
+ * creates a mutated Gatorade (called ZombieAde), which turns drinkers into idiotic Flordia fans, aka Zombies. 
+ * The hero must travel through campus and find this machine and destroy it before it is too late. 
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2011.08.08
+ * Additions to Zuul - So far, we've added a lot of rooms to the original game. We still have to name them, and add a few more rooms. 
+ *
+ *
  */
 
 public class Game 
 {
     private Parser parser;
     private Room currentRoom;
-    private Room jitteryJoes, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11;
-
+    private Room jitteryJoes, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11, room12, room13, room14, room15;
+    private Room staffRoom;
     /**
      * Create the game and initialise its internal map.
      */
@@ -39,7 +38,7 @@ public class Game
         Room jitteryJoes, theater, pub, lab, office;
 
         // create the rooms
-        jitteryJoes = new Room("jitteryJoes");
+        jitteryJoes = new Room("in Jittery Joes");
         room2 = new Room("in a lecture theater");
         room3 = new Room("in a lecture theater");
         room4 = new Room("in a lecture theater");
@@ -50,9 +49,12 @@ public class Game
         room9 = new Room("in a lecture theater");
         room10 = new Room("in a lecture theater");
         room11 = new Room("in a lecture theater");
-        
+        room12 = new Room("in a lecture theater");
+        room13 = new Room("in a lecture theater");
+        room14 = new Room("in a lecture theater");
+        room15 = new Room("in a lecture theater");
 
-        office = new SpecialRoomOffice("in the computing admin office" +
+        staffRoom = new SpecialRoom("in the Staff Room" +
             ".  There is a button on the desk.");
 
         // initialise room exits
@@ -78,13 +80,29 @@ public class Game
         room6.setExit("north", room5);
 
         room8.setExit("north", room7);
-        
+        room8.setExit("south", staffRoom);
+
         room9.setExit("north", room10);
         room9.setExit("south", room8);
-        
-        room10.setExit("north", room11);
 
-       
+        room10.setExit("north", room11);
+        room10.setExit("east", room12);
+
+        room11.setExit("west", room15);
+        room11.setExit("south", room10);
+
+        room12.setExit("north", room15);
+        room12.setExit("east", room13);
+
+        room13.setExit("west", room12);
+        room13.setExit("north", room14);
+
+        room14.setExit("south", room13);
+        room14.setExit("west", room15);
+
+        room15.setExit("east", room14);
+        room15.setExit("west", room11);
+        room10.setExit("south", room12);
 
         currentRoom = jitteryJoes;  // start game jitteryJoes
     }
@@ -141,7 +159,7 @@ public class Game
         else if (commandWord.equals("go")) {
             goRoom(command);
         }
-        else if (commandWord.equals("press")) {
+        else if (commandWord.equals("swipe")) {
             currentRoom.press(command);
             System.out.println(currentRoom.getLongDescription());
         }
