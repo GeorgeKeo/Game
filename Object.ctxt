@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Object()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Object\r\n
+comment1.params=size
+comment1.target=int\ rng(int)
+numComments=2
