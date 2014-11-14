@@ -106,6 +106,8 @@ public class Game
         seHall.setExit("east", swHall);
         seHall.setExit("west", tateEntrance2);
         tateEntrance1.setExit("south", neHall);
+        
+        staffRoom.setExit("north", mezzanine);
 
         currentRoom = jitteryJoes;  // start game jitteryJoes
     }
@@ -185,8 +187,8 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("You are wandering around the university.");
+        System.out.println("You have to find. . . ");
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
