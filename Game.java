@@ -10,7 +10,9 @@
  * creates a mutated Gatorade (called ZombieAde), which turns drinkers into idiotic Flordia fans, aka Zombies. 
  * The hero must travel through campus and find this machine and destroy it before it is too late. 
  * 
- * Additions to Zuul - So far, we've added a lot of rooms to the original game. We still have to name them, and add a few more rooms. 
+ * Additions to Zuul - So far, we've added a lot of rooms to the original game. We changed the command from "press" to "swipe" for ID cards.
+ * 
+ * 
  *
  *
  */
@@ -19,7 +21,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private Room jitteryJoes, room2, room3, room4, room5, room6, room7, room8, room9, room10, room11, room12, room13, room14, room15;
+    private Room jitteryJoes, eastStudyRoom, corridor, westWing, cafe, northEntrance, smokingArea, mezzanine, bridge, tateEntrance1, tateEntrance2, neHall, nwHall, swHall, seHall;
     private Room staffRoom;
     /**
      * Create the game and initialise its internal map.
@@ -39,70 +41,70 @@ public class Game
 
         // create the rooms
         jitteryJoes = new Room("in Jittery Joes");
-        room2 = new Room("in a lecture theater");
-        room3 = new Room("in a lecture theater");
-        room4 = new Room("in a lecture theater");
-        room5 = new Room("in a lecture theater");
-        room6 = new Room("in a lecture theater");
-        room7 = new Room("in a lecture theater");
-        room8 = new Room("in a lecture theater");
-        room9 = new Room("in a lecture theater");
-        room10 = new Room("in a lecture theater");
-        room11 = new Room("in a lecture theater");
-        room12 = new Room("in a lecture theater");
-        room13 = new Room("in a lecture theater");
-        room14 = new Room("in a lecture theater");
-        room15 = new Room("in a lecture theater");
+        eastStudyRoom = new Room("in the East Study Room. All of the private study rooms are destroyed.");
+        corridor = new Room("in a corridor between the East Study Room and the West Wing");
+        westWing = new Room("in the West Wing.");
+        cafe = new Room("in the cafe");
+        northEntrance = new Room("at the North Entrance to MLC.");
+        smokingArea = new Room("in the smoking area. There are a lot of cigarette butts everywhere...");
+        mezzanine = new Room("in the mezzanine. There seems to be a small door to the north...");
+        bridge = new Room("on the bridge between Tate and MLC. Seems a little shaky...");
+        tateEntrance1 = new Room("at the first entrance of Tate");
+        tateEntrance2 = new Room("at the second entrance of Tate");
+        neHall = new Room("in the North East Hall of Tate");
+        nwHall = new Room("in the North West Hall of Tate");
+        swHall = new Room("in the South West Hall of Tate");
+        seHall = new Room("in the South East Hall of Tate");
 
         staffRoom = new SpecialRoom("in the Staff Room" +
-            ".  There is a button on the desk.");
+            ".  There is a slot for your ID card.");
 
         // initialise room exits
-        jitteryJoes.setExit("north", room2);
-        jitteryJoes.setExit("south", room5);
+        jitteryJoes.setExit("south", eastStudyRoom);
+        jitteryJoes.setExit("north", cafe);
 
-        room2.setExit("south", jitteryJoes);
-        room2.setExit("west", room7);
-        room2.setExit("east", room3);
+        eastStudyRoom.setExit("north", jitteryJoes);
+        eastStudyRoom.setExit("east", smokingArea);
+        eastStudyRoom.setExit("west", corridor);
 
-        room7.setExit("south", room8);
-        room7.setExit("east", room2);
-        room4.setExit("north", room9);
+        smokingArea.setExit("north", mezzanine);
+        smokingArea.setExit("west", eastStudyRoom);
+        westWing.setExit("south", bridge);
 
-        room3.setExit("west", room2);
-        room3.setExit("east", room4);
+        corridor.setExit("east", eastStudyRoom);
+        corridor.setExit("west", westWing);
 
-        room4.setExit("west", room3);
+        westWing.setExit("east", corridor);
 
-        room5.setExit("north", jitteryJoes);
-        room5.setExit("south", room6);
+        cafe.setExit("south", jitteryJoes);
+        cafe.setExit("north", northEntrance);
 
-        room6.setExit("north", room5);
+        northEntrance.setExit("south", cafe);
 
-        room8.setExit("north", room7);
-        room8.setExit("south", staffRoom);
+        mezzanine.setExit("south", smokingArea);
+        mezzanine.setExit("north", staffRoom);
 
-        room9.setExit("north", room10);
-        room9.setExit("south", room8);
+        bridge.setExit("south", tateEntrance1);
+        bridge.setExit("north", mezzanine);
 
-        room10.setExit("north", room11);
-        room10.setExit("east", room12);
+        tateEntrance1.setExit("north", tateEntrance2);
+        tateEntrance1.setExit("east", neHall);
 
-        room11.setExit("west", room15);
-        room11.setExit("south", room10);
+        tateEntrance2.setExit("west", seHall);
+        tateEntrance2.setExit("south", tateEntrance1);
 
-        room12.setExit("north", room15);
-        room12.setExit("east", room13);
+        neHall.setExit("north", seHall);
+        neHall.setExit("east", nwHall);
 
-        room13.setExit("west", room12);
-        room13.setExit("north", room14);
+        nwHall.setExit("west", neHall);
+        nwHall.setExit("north", swHall);
 
-        room14.setExit("south", room13);
-        room14.setExit("west", room15);
+        swHall.setExit("south", nwHall);
+        swHall.setExit("west", seHall);
 
-        room15.setExit("east", room14);
-        room15.setExit("west", room11);
-        room10.setExit("south", room12);
+        seHall.setExit("east", swHall);
+        seHall.setExit("west", tateEntrance2);
+        tateEntrance1.setExit("south", neHall);
 
         currentRoom = jitteryJoes;  // start game jitteryJoes
     }
@@ -131,8 +133,11 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("You wake up in a daze...'How did I get here?' you ask yourself");
+        System.out.println("You sit up and realize you are at Jittery Joes inside of the MLC");
+        System.out.println("But something is different...everything seems...post-apocolyptic.");
+        System.out.println("You see the words 'Gator Hater' written in blood on the wall but that makes no sense to you");
+        System.out.println("You stand up and decide it is time to start your journey...");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
