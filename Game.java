@@ -1,3 +1,4 @@
+import java.util.Random;
 /**
  *
  * GATOR HATERS
@@ -233,4 +234,10 @@ public class Game
         }
     }
 
+    public int rng(int size)
+    {
+        Random rng = new Random();
+        int randomInt = rng.nextInt(size);
+        return randomInt;
+    }
 }
