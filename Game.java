@@ -10,7 +10,9 @@
  * creates a mutated Gatorade (called ZombieAde), which turns drinkers into idiotic Flordia fans, aka Zombies. 
  * The hero must travel through campus and find this machine and destroy it before it is too late. 
  * 
- * Additions to Zuul - So far, we've added a lot of rooms to the original game. We changed the command from "press" to "swipe" for ID cards.
+ * Additions to Zuul - So far, we've added a lot of rooms to the original game. We changed the command from "press" to "swipe" for ID cards. 
+ * We are also adding a random number generator method to many of our classes because we will be utilizing that for zombie and item spawning. 
+ * 
  * 
  * 
  *
