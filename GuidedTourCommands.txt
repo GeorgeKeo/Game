@@ -1,0 +1,7 @@
+go south
+go east
+go north
+go north
+swipe ID
+go down
+quit

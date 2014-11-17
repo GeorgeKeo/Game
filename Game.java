@@ -25,6 +25,7 @@ public class Game
     private Room currentRoom;
     private Room jitteryJoes, eastStudyRoom, corridor, westWing, cafe, northEntrance, smokingArea, mezzanine, bridge, tateEntrance1, tateEntrance2, neHall, nwHall, swHall, seHall;
     private Room staffRoom;
+    private ParserWithFileInput parserWithFileInput;
     /**
      * Create the game and initialise its internal map.
      */
@@ -32,6 +33,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        parserWithFileInput = new ParserWithFileInput();
     }
 
     /**
@@ -107,7 +109,7 @@ public class Game
         seHall.setExit("east", swHall);
         seHall.setExit("west", tateEntrance2);
         tateEntrance1.setExit("south", neHall);
-        
+
         staffRoom.setExit("north", mezzanine);
 
         currentRoom = jitteryJoes;  // start game jitteryJoes
@@ -126,6 +128,20 @@ public class Game
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
+            finished = processCommand(command);
+        }
+        System.out.println("Thank you for playing.  Good bye.");
+    }
+
+    public void playWithFileInput() 
+    {            
+        printWelcome();
+        // Enter the main command loop.  Here we repeatedly read commands and
+        // execute them until the game is over.
+
+        boolean finished = false;
+        while (! finished) {
+            Command command = parserWithFileInput.getCommand();
             finished = processCommand(command);
         }
         System.out.println("Thank you for playing.  Good bye.");
