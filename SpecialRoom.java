@@ -18,7 +18,7 @@ public class SpecialRoom extends Room
     }
     public void press(Command command)
     {
-        if(command.getSecondWord().equals("ID"))
+        /**if(command.getSecondWord().equals("ID"))
         {
             System.out.println("You swipe your ID and then a door " +
                 "slides open revealing a staircase.");
@@ -29,10 +29,26 @@ public class SpecialRoom extends Room
             ".  \nThere is a slot for you to swipe your ID." +
             "\nAn opening in the wall reveals a staircase leading down.");
         }
-        else
+        else **/ if(command.getSecondWord().equals("case"))
+        
+        {
+            System.out.println("You open the case, and you see " +
+                "some stairs leading down..");
+            Room oarRoom = new Room("in a hallway with a shining light at the end of it."
+            + "Upon closer inspection, you see that the light is shining up the GA/FL Oar");
+            setExit("downstairs", oarRoom);
+            oarRoom.setExit("up", this);
+            changeDescription("in the Staff Room" +
+            ".  \nThere is a slot for you to swipe your ID." +
+            "\nAn opening in the wall reveals a staircase leading down.");
+        }
+        
+        else 
         {
             super.press(command);
         }
+        
+       
     }
 
     

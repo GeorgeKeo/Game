@@ -24,7 +24,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Room jitteryJoes, eastStudyRoom, corridor, westWing, cafe, northEntrance, smokingArea, mezzanine, bridge, tateEntrance1, tateEntrance2, neHall, nwHall, swHall, seHall;
-    private Room staffRoom, oarRoom;
+    private Room staffRoom;
     private Room staircase, cafe2, hallway;
     private Room atrium, tateCafe, tateCorridor, informationDesk, bulldogCafe, theater;
     private ParserWithFileInput parserWithFileInput;
@@ -66,7 +66,7 @@ public class Game
         hallway = new Room("in the hallway on the 4th floor of Tate. There are many empty classrooms around you.");
         atrium = new Room("in the atrium on the main floor of Tate.");
         tateCafe = new Room("in by the Tate Cafe.");
-        tateCorridor = new Room("in the corridor between New Tate and Old Tate.");
+       
         informationDesk = new Room("by the information desk. There is a pamphlet about abortion sitting on the table.");
         bulldogCafe = new Room("at the Bulldog Cafe. You wonder if there is any leftover Chick-Fil-A.");
         theater = new Room("at the Theater. You see stale popcorn on the ground.");
@@ -74,7 +74,8 @@ public class Game
         staffRoom = new SpecialRoom("in the Staff Room" +
             ".  There is a slot for your ID card.");
 
-        oarRoom = new SpecialRoom("looking into the Oar Case. Something tells you there is a pressure sensitive floor inside of it...");
+        tateCorridor = new SpecialRoom("in the corridor between New Tate and Old Tate." +
+        "The case for the GA/FL oar is ajar...");
 
 
             // initialise room exits
@@ -87,7 +88,7 @@ public class Game
 
         smokingArea.setExit("north", mezzanine);
         smokingArea.setExit("west", eastStudyRoom);
-        westWing.setExit("south", bridge);
+        smokingArea.setExit("south", bridge);
 
         corridor.setExit("east", eastStudyRoom);
         corridor.setExit("west", westWing);
@@ -106,13 +107,14 @@ public class Game
         bridge.setExit("north", mezzanine);
 
         tateEntrance1.setExit("north", tateEntrance2);
-        tateEntrance1.setExit("east", neHall);
+        tateEntrance1.setExit("west", neHall);
 
         tateEntrance2.setExit("west", seHall);
         tateEntrance2.setExit("south", tateEntrance1);
 
         neHall.setExit("north", seHall);
         neHall.setExit("east", nwHall);
+        neHall.setExit("downstairs", staircase);
 
         nwHall.setExit("west", neHall);
         nwHall.setExit("north", swHall);
@@ -125,6 +127,30 @@ public class Game
         tateEntrance1.setExit("south", neHall);
 
         staffRoom.setExit("north", mezzanine);
+        
+        staircase.setExit("west", cafe2);
+        staircase.setExit("upstairs", neHall);
+        
+        cafe2.setExit("west", staircase);
+        cafe2.setExit("south", hallway);
+        cafe2.setExit("downstairs", atrium);
+        
+        hallway.setExit("north", cafe2);
+        
+        atrium.setExit("upstairs", cafe2);
+        atrium.setExit("north", tateCafe);
+        atrium.setExit("east", tateCorridor);
+        
+        tateCorridor.setExit("west", atrium);
+        tateCorridor.setExit("east", informationDesk);
+        
+        informationDesk.setExit("west", tateCorridor);
+        informationDesk.setExit("north", bulldogCafe);
+        
+        bulldogCafe.setExit("south", informationDesk);
+        bulldogCafe.setExit("east", theater);
+        
+        theater.setExit("west", bulldogCafe);       
         
         
 
