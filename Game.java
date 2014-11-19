@@ -24,7 +24,9 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Room jitteryJoes, eastStudyRoom, corridor, westWing, cafe, northEntrance, smokingArea, mezzanine, bridge, tateEntrance1, tateEntrance2, neHall, nwHall, swHall, seHall;
-    private Room staffRoom;
+    private Room staffRoom, oarRoom;
+    private Room staircase, cafe2, hallway;
+    private Room atrium, tateCafe, tateCorridor, informationDesk, bulldogCafe, theater;
     private ParserWithFileInput parserWithFileInput;
     /**
      * Create the game and initialise its internal map.
@@ -59,11 +61,23 @@ public class Game
         nwHall = new Room("in the North West Hall of Tate");
         swHall = new Room("in the South West Hall of Tate");
         seHall = new Room("in the South East Hall of Tate");
+        staircase = new Room("at the staircase on the 4th floor of Tate");
+        cafe2 = new Room("at the cafe on the 4th floor of Tate");
+        hallway = new Room("in the hallway on the 4th floor of Tate. There are many empty classrooms around you.");
+        atrium = new Room("in the atrium on the main floor of Tate.");
+        tateCafe = new Room("in by the Tate Cafe.");
+        tateCorridor = new Room("in the corridor between New Tate and Old Tate.");
+        informationDesk = new Room("by the information desk. There is a pamphlet about abortion sitting on the table.");
+        bulldogCafe = new Room("at the Bulldog Cafe. You wonder if there is any leftover Chick-Fil-A.");
+        theater = new Room("at the Theater. You see stale popcorn on the ground.");
 
         staffRoom = new SpecialRoom("in the Staff Room" +
             ".  There is a slot for your ID card.");
 
-        // initialise room exits
+        oarRoom = new SpecialRoom("looking into the Oar Case. Something tells you there is a pressure sensitive floor inside of it...");
+
+
+            // initialise room exits
         jitteryJoes.setExit("south", eastStudyRoom);
         jitteryJoes.setExit("north", cafe);
 
@@ -111,6 +125,8 @@ public class Game
         tateEntrance1.setExit("south", neHall);
 
         staffRoom.setExit("north", mezzanine);
+        
+        
 
         currentRoom = jitteryJoes;  // start game jitteryJoes
     }
@@ -157,6 +173,7 @@ public class Game
         System.out.println("You sit up and realize you are at Jittery Joes inside of the MLC");
         System.out.println("But something is different...everything seems...post-apocolyptic.");
         System.out.println("You see the words 'Gator Hater' written in blood on the wall but that makes no sense to you");
+
         System.out.println("You stand up and decide it is time to start your journey...");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
