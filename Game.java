@@ -84,8 +84,9 @@ public class Game
         tateCorridor = new SpecialRoom("in the corridor between New Tate and Old Tate." +
         "The case for the GA/FL oar is ajar...");
 
-
+           
             // initialise room exits
+        // MLC 3rd floor
         jitteryJoes.setExit("south", eastStudyRoom);
         jitteryJoes.setExit("north", cafe);
         jitteryJoes.setItem("flashlight", flashlight);
@@ -111,33 +112,38 @@ public class Game
 
         mezzanine.setExit("south", smokingArea);
         mezzanine.setExit("north", staffRoom);
+        
+        staffRoom.setExit("south", mezzanine);
 
         bridge.setExit("south", tateEntrance1);
         bridge.setExit("north", mezzanine);
+        
+        //Tate 5th Floor
 
-        tateEntrance1.setExit("north", tateEntrance2);
+        tateEntrance1.setExit("north", bridge);
         tateEntrance1.setExit("west", neHall);
-
+        tateEntrance1.setExit("south", tateEntrance2);
+        
         tateEntrance2.setExit("west", seHall);
-        tateEntrance2.setExit("south", tateEntrance1);
+        tateEntrance2.setExit("north", tateEntrance1);
 
-        neHall.setExit("north", seHall);
-        neHall.setExit("east", nwHall);
+        neHall.setExit("south", seHall);
+        neHall.setExit("west", nwHall);
         neHall.setExit("downstairs", staircase);
 
         nwHall.setExit("west", neHall);
-        nwHall.setExit("north", swHall);
+        nwHall.setExit("south", swHall);
 
-        swHall.setExit("south", nwHall);
-        swHall.setExit("west", seHall);
+        swHall.setExit("north", nwHall);
+        swHall.setExit("east", seHall);
 
-        seHall.setExit("east", swHall);
-        seHall.setExit("west", tateEntrance2);
-        tateEntrance1.setExit("south", neHall);
-
-        staffRoom.setExit("north", mezzanine);
+        seHall.setExit("west", swHall);
+        seHall.setExit("north", neHall);
+        seHall.setExit("east", tateEntrance2);
         
-        staircase.setExit("west", cafe2);
+        //Tate 4th Floor
+                              
+        staircase.setExit("east", cafe2);
         staircase.setExit("upstairs", neHall);
         
         cafe2.setExit("west", staircase);
@@ -145,6 +151,8 @@ public class Game
         cafe2.setExit("downstairs", atrium);
         
         hallway.setExit("north", cafe2);
+        
+        //Tate 3rd Floor
         
         atrium.setExit("upstairs", cafe2);
         atrium.setExit("north", tateCafe);
@@ -240,6 +248,10 @@ public class Game
             grabItem(command);
         }
         else if (commandWord.equals("swipe")) {
+            currentRoom.press(command);
+            System.out.println(currentRoom.getLongDescription());
+        }
+        else if (commandWord.equals("open")) {
             currentRoom.press(command);
             System.out.println(currentRoom.getLongDescription());
         }
