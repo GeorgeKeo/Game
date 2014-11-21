@@ -19,6 +19,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
+    private HashMap<String, Object> items;
 
     /**
      * Create a room described "description". Initially, it has
@@ -30,6 +31,7 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<String, Room>();
+        items = new HashMap<String, Object>();
     }
 
     /**
@@ -59,7 +61,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+        return "You are " + description + ".\n" + getExitString() + ".\n" + getItemString();
     }
 
     /**
@@ -77,6 +79,16 @@ public class Room
         return returnString;
     }
 
+    public String getItemString()
+    {
+        String returnString = "Items:";
+        Set<String> keys = items.keySet();
+        for (String item : keys){
+            returnString += " " + item;
+        }
+        return returnString; 
+    }
+    
     /**
      * Return the room that is reached if we go from this room in direction
      * "direction". If there is no room in that direction, return null.
@@ -87,13 +99,37 @@ public class Room
     {
         return exits.get(direction);
     }
+
     public void press(Command command)
     {
         System.out.println("Do What?");
     }
+
     public void changeDescription(String newDescription)
     {
         description = newDescription;
     }
+    
+     /**
+     * Define an item from this room.
+     * @param name The name of item
+     * @param item  The the item to add 
+     */
+    public void setItem(String name, Object item) 
+    {
+        items.put(name, item);
+    }
+    
+    /**
+     * Return the room that is reached if we go from this room in direction
+     * "direction". If there is no room in that direction, return null.
+     * @param direction The exit's direction.
+     * @return The room in the given direction.
+     */
+    public Object getItem(String name) 
+    {
+        return items.get(name);
+    }
+    
 }
 

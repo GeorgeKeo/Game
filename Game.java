@@ -1,3 +1,5 @@
+import java.util.Set;
+import java.util.HashMap;
 /**
  *
  * GATOR HATERS
@@ -28,6 +30,10 @@ public class Game
     private Room staircase, cafe2, hallway;
     private Room atrium, tateCafe, tateCorridor, informationDesk, bulldogCafe, theater;
     private ParserWithFileInput parserWithFileInput;
+    
+    private Object flashlight;
+    private HashMap<String, Object> bagItems; 
+    
     /**
      * Create the game and initialise its internal map.
      */
@@ -36,6 +42,7 @@ public class Game
         createRooms();
         parser = new Parser();
         parserWithFileInput = new ParserWithFileInput();
+        bagItems = new HashMap<String, Object>(); 
     }
 
     /**
@@ -81,6 +88,8 @@ public class Game
             // initialise room exits
         jitteryJoes.setExit("south", eastStudyRoom);
         jitteryJoes.setExit("north", cafe);
+        jitteryJoes.setItem("flashlight", flashlight);
+       
 
         eastStudyRoom.setExit("north", jitteryJoes);
         eastStudyRoom.setExit("east", smokingArea);
@@ -227,6 +236,9 @@ public class Game
         else if (commandWord.equals("go")) {
             goRoom(command);
         }
+        else if (commandWord.equals("grab")){
+            grabItem(command);
+        }
         else if (commandWord.equals("swipe")) {
             currentRoom.press(command);
             System.out.println(currentRoom.getLongDescription());
@@ -280,6 +292,26 @@ public class Game
         }
     }
 
+    private void grabItem(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Grab what?");
+            return;
+        }
+       
+        String name = command.getSecondWord();
+        Object newItem = currentRoom.getItem(name);
+        
+        if (newItem == null) {
+            System.out.println("There is no item!");
+        }
+        else {
+            bagItems.put(name, newItem);
+            System.out.println("You picked up " + newItem);
+        }
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
