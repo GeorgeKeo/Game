@@ -71,7 +71,7 @@ public class Game
         seHall = new Room("in the South East Hall of Tate");
         staircase = new Room("at the staircase on the 4th floor of Tate");
         cafe2 = new Room("at the cafe on the 4th floor of Tate");
-        hallway = new Room("in the hallway on the 4th floor of Tate. There are many empty classrooms around you.");
+        hallway = new SpecialRoomOar("in the hallway on the 4th floor of Tate. There are many empty classrooms around you.");
         atrium = new Room("in the atrium on the main floor of Tate.");
         tateCafe = new Room("in by the Tate Cafe.");
        
@@ -257,6 +257,10 @@ public class Game
             System.out.println(currentRoom.getLongDescription());
         }
         else if (commandWord.equals("open")) {
+            currentRoom.press(command);
+            System.out.println(currentRoom.getLongDescription());
+        }
+        else if (commandWord.equals("push")) {
             currentRoom.press(command);
             System.out.println(currentRoom.getLongDescription());
         }
