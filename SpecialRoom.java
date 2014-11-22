@@ -41,7 +41,8 @@ public class SpecialRoom extends Room
             ".  \nThe GA/FL Oar case is open revealing a staircase leading down.");
         }
         
-        else 
+       
+        else
         {
             super.press(command);
         }

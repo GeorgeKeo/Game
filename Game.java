@@ -81,7 +81,7 @@ public class Game
         staffRoom = new SpecialRoom("in the Staff Room" +
             ".  There is a slot for your ID card.");
 
-        tateCorridor = new SpecialRoom("in the corridor between New Tate and Old Tate." +
+        tateCorridor = new SpecialRoomOar("in the corridor between New Tate and Old Tate." +
         "The case for the GA/FL oar is ajar...");
 
            
@@ -128,10 +128,12 @@ public class Game
         tateEntrance2.setExit("north", tateEntrance1);
 
         neHall.setExit("south", seHall);
+        neHall.setExit("east", tateEntrance1);
         neHall.setExit("west", nwHall);
         neHall.setExit("downstairs", staircase);
+        
 
-        nwHall.setExit("west", neHall);
+        nwHall.setExit("east", neHall);
         nwHall.setExit("south", swHall);
 
         swHall.setExit("north", nwHall);
@@ -157,6 +159,8 @@ public class Game
         atrium.setExit("upstairs", cafe2);
         atrium.setExit("north", tateCafe);
         atrium.setExit("east", tateCorridor);
+        
+        tateCafe.setExit("south", atrium);
         
         tateCorridor.setExit("west", atrium);
         tateCorridor.setExit("east", informationDesk);
@@ -339,5 +343,6 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
-
+    
+    
 }
