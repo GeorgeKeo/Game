@@ -32,6 +32,7 @@ public class Game
     private ParserWithFileInput parserWithFileInput;
     
     private Object flashlight;
+    private Object newItem;
     private HashMap<String, Object> bagItems; 
     
     /**
@@ -317,14 +318,14 @@ public class Game
         }
        
         String name = command.getSecondWord();
-        Object newItem = currentRoom.getItem(name);
+        newItem = new Object(currentRoom.getItemName());
         
         if (newItem == null) {
             System.out.println("There is no item!");
         }
         else {
             bagItems.put(name, newItem);
-            System.out.println("You picked up " + newItem);
+            System.out.println("You picked up " + newItem.getName());
         }
     }
     

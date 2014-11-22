@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class Object
 {
-    public Object nerfGun, GaFlOar, flashlight, nerfDarts, dawgTreats, batteries, gurleyJersey;   
+    public Object nerfGun, GaFlOar, nerfDarts, dawgTreats, gurleyJersey;   
     
     private String name;
     private int numberItems;

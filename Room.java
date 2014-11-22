@@ -88,6 +88,16 @@ public class Room
         }
         return returnString; 
     }
+
+    public String getItemName()
+    {
+        String returnString = "";
+        Set<String> keys = items.keySet();
+        for (String item : keys){
+            returnString = item;
+        }
+        return returnString;
+    }
     
     /**
      * Return the room that is reached if we go from this room in direction
@@ -109,8 +119,8 @@ public class Room
     {
         description = newDescription;
     }
-    
-     /**
+
+    /**
      * Define an item from this room.
      * @param name The name of item
      * @param item  The the item to add 
@@ -119,17 +129,12 @@ public class Room
     {
         items.put(name, item);
     }
-    
-    /**
-     * Return the room that is reached if we go from this room in direction
-     * "direction". If there is no room in that direction, return null.
-     * @param direction The exit's direction.
-     * @return The room in the given direction.
-     */
-    public Object getItem(String name) 
+
+     
+    /**public String getItem(Object name) 
     {
-        return items.get(name);
+       return items.get();
     }
-    
+*/
 }
 
