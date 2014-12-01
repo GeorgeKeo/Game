@@ -1,5 +1,6 @@
 import java.util.Set;
 import java.util.HashMap;
+import java.util.Random;
 /**
  *
  * GATOR HATERS
@@ -102,7 +103,7 @@ public class Game
         smokingArea.setExit("west", eastStudyRoom);
         smokingArea.setExit("south", bridge);
         smokingArea.setItem("nerfdarts", nerfDarts);
-        smokingArea.setDart(1);
+        smokingArea.setDart(rng());
 
         corridor.setExit("east", eastStudyRoom);
         corridor.setExit("west", westWing);
@@ -111,7 +112,7 @@ public class Game
 
         westWing.setExit("east", corridor);
         westWing.setItem("nerfdarts", nerfDarts);
-        westWing.setDart(4);
+        westWing.setDart(rng());
 
         cafe.setExit("south", jitteryJoes);
         cafe.setExit("north", northEntrance);
@@ -119,7 +120,7 @@ public class Game
 
         northEntrance.setExit("south", cafe);
         northEntrance.setItem("nerfdarts", nerfDarts);
-        northEntrance.setDart(4);
+        northEntrance.setDart(rng());
 
         mezzanine.setExit("south", smokingArea);
         mezzanine.setExit("north", staffRoom);
@@ -148,7 +149,7 @@ public class Game
         nwHall.setExit("east", neHall);
         nwHall.setExit("south", swHall);
         nwHall.setItem("nerfdarts", nerfDarts);
-        nerfDarts.setNumber(3);
+        nwHall.setDart(rng());
 
         swHall.setExit("north", nwHall);
         swHall.setExit("east", seHall);
@@ -194,14 +195,9 @@ public class Game
 
         theater.setExit("west", bulldogCafe);
         theater.setItem("nerfdarts", nerfDarts);
-        nerfDarts.setNumber(10);
+        theater.setDart(rng());
 
-        theater.setExit("west", bulldogCafe);
-        theater.setItem("nerfdarts", nerfDarts);
-        nerfDarts.setNumber(10);
-
-
-
+       
         currentRoom = jitteryJoes;  // start game jitteryJoes
         ;
     }
@@ -448,5 +444,13 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
+    
+    private int rng()
+   {
+       Random rng = new Random();
+       int randomInt = rng.nextInt(4);
+       return randomInt + 1;
+       
+   }
 
 }
