@@ -20,6 +20,7 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
     private HashMap<String, Object> items;
+    private Creature zombies;
 
     /**
      * Create a room described "description". Initially, it has
@@ -32,6 +33,7 @@ public class Room
         this.description = description;
         exits = new HashMap<String, Room>();
         items = new HashMap<String, Object>();
+        zombies = new Creature ("zombie", 0);
     }
 
     /**
@@ -61,7 +63,8 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString() + ".\n" + getItemString();
+        return "You are " + description + ".\n" + getExitString() + ".\n" 
+                + getItemString() + ".\n" + getZombieString();
     }
 
     /**
@@ -88,6 +91,17 @@ public class Room
         }
         return returnString; 
     }
+    
+    public String getZombieString()
+    {
+        if(zombies == null){
+            return ("There are no zombies in this room.");
+        }
+        
+        else {
+            return ("There are " + zombies.getNumber() + " zombies in the room.");
+        }
+    }
 
     public String getItemName()
     {
@@ -98,7 +112,7 @@ public class Room
         }
         return returnString;
     }
-    
+
     /**
      * Return the room that is reached if we go from this room in direction
      * "direction". If there is no room in that direction, return null.
@@ -129,12 +143,17 @@ public class Room
     {
         items.put(name, item);
     }
-
-     
-    /**public String getItem(Object name) 
+    
+    public void setZombies(int number)
     {
-       return items.get();
+        zombies = new Creature("zombie", number);
     }
-*/
+    
+    public int getZombieNumber()
+    {
+        return zombies.getNumber();
+    }
+    
 }
+
 

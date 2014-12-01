@@ -30,11 +30,11 @@ public class Game
     private Room staircase, cafe2, hallway;
     private Room atrium, tateCafe, tateCorridor, informationDesk, bulldogCafe, theater;
     private ParserWithFileInput parserWithFileInput;
-    
-    private Object flashlight;
+
+    private Object flashlight, dawgTreats, nerfDarts;
     private Object newItem;
     private HashMap<String, Object> bagItems; 
-    
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -52,7 +52,7 @@ public class Game
     private void createRooms()
     {
         Room jitteryJoes, theater, pub, lab, office;
-
+        nerfDarts = new Object("nerfDarts");
         // create the rooms
         jitteryJoes = new Room("in Jittery Joes");
         eastStudyRoom = new Room("in the East Study Room. All of the private study rooms are destroyed.");
@@ -74,7 +74,7 @@ public class Game
         hallway = new SpecialRoomOar("in the hallway on the 4th floor of Tate. There are many empty classrooms around you.");
         atrium = new Room("in the atrium on the main floor of Tate.");
         tateCafe = new Room("in by the Tate Cafe.");
-       
+
         informationDesk = new Room("by the information desk. There is a pamphlet about abortion sitting on the table.");
         bulldogCafe = new Room("at the Bulldog Cafe. You wonder if there is any leftover Chick-Fil-A.");
         theater = new Room("at the Theater. You see stale popcorn on the ground.");
@@ -83,19 +83,20 @@ public class Game
             ".  There is a slot for your ID card.");
 
         tateCorridor = new SpecialRoomOar("in the corridor between New Tate and Old Tate." +
-        "The case for the GA/FL oar is ajar...");
+            "The case for the GA/FL oar is ajar...");
 
-           
-            // initialise room exits
+        // initialise room exits
         // MLC 3rd floor
         jitteryJoes.setExit("south", eastStudyRoom);
         jitteryJoes.setExit("north", cafe);
-        jitteryJoes.setItem("flashlight", flashlight);
-       
+        //jitteryJoes.setItem("flashlight", flashlight);
+        jitteryJoes.setItem("nerfdarts", nerfDarts);
+        nerfDarts.setNumber(5);
 
         eastStudyRoom.setExit("north", jitteryJoes);
         eastStudyRoom.setExit("east", smokingArea);
         eastStudyRoom.setExit("west", corridor);
+        eastStudyRoom.setItem("dogtreat", dawgTreats);
 
         smokingArea.setExit("north", mezzanine);
         smokingArea.setExit("west", eastStudyRoom);
@@ -108,23 +109,23 @@ public class Game
 
         cafe.setExit("south", jitteryJoes);
         cafe.setExit("north", northEntrance);
+        cafe.setZombies(6);
 
         northEntrance.setExit("south", cafe);
-
         mezzanine.setExit("south", smokingArea);
         mezzanine.setExit("north", staffRoom);
-        
+
         staffRoom.setExit("south", mezzanine);
 
         bridge.setExit("south", tateEntrance1);
         bridge.setExit("north", mezzanine);
-        
+
         //Tate 5th Floor
 
         tateEntrance1.setExit("north", bridge);
         tateEntrance1.setExit("west", neHall);
         tateEntrance1.setExit("south", tateEntrance2);
-        
+
         tateEntrance2.setExit("west", seHall);
         tateEntrance2.setExit("north", tateEntrance1);
 
@@ -132,7 +133,6 @@ public class Game
         neHall.setExit("east", tateEntrance1);
         neHall.setExit("west", nwHall);
         neHall.setExit("downstairs", staircase);
-        
 
         nwHall.setExit("east", neHall);
         nwHall.setExit("south", swHall);
@@ -143,40 +143,40 @@ public class Game
         seHall.setExit("west", swHall);
         seHall.setExit("north", neHall);
         seHall.setExit("east", tateEntrance2);
-        
+
         //Tate 4th Floor
-                              
+
         staircase.setExit("east", cafe2);
         staircase.setExit("upstairs", neHall);
-        
+
         cafe2.setExit("west", staircase);
         cafe2.setExit("south", hallway);
         cafe2.setExit("downstairs", atrium);
-        
+
         hallway.setExit("north", cafe2);
-        
+
         //Tate 3rd Floor
-        
+
         atrium.setExit("upstairs", cafe2);
         atrium.setExit("north", tateCafe);
         atrium.setExit("east", tateCorridor);
-        
+
         tateCafe.setExit("south", atrium);
-        
+
         tateCorridor.setExit("west", atrium);
         tateCorridor.setExit("east", informationDesk);
-        
+
         informationDesk.setExit("west", tateCorridor);
         informationDesk.setExit("north", bulldogCafe);
-        
+
         bulldogCafe.setExit("south", informationDesk);
         bulldogCafe.setExit("east", theater);
-        
+
         theater.setExit("west", bulldogCafe);       
-        
-        
+
 
         currentRoom = jitteryJoes;  // start game jitteryJoes
+       ;
     }
 
     /**
@@ -193,6 +193,7 @@ public class Game
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -251,6 +252,9 @@ public class Game
         }
         else if (commandWord.equals("grab")){
             grabItem(command);
+        }
+        else if (commandWord.equals("fight")) {
+            fightZombies(command);
         }
         else if (commandWord.equals("swipe")) {
             currentRoom.press(command);
@@ -320,19 +324,59 @@ public class Game
             System.out.println("Grab what?");
             return;
         }
-       
+
         String name = command.getSecondWord();
         newItem = new Object(currentRoom.getItemName());
-        
-        if (newItem == null) {
-            System.out.println("There is no item!");
-        }
-        else {
+
+        if (currentRoom.getItemName().equalsIgnoreCase(name)){
             bagItems.put(name, newItem);
-            System.out.println("You picked up " + newItem.getName());
+            System.out.println("Item added to Satchel");
+            System.out.println("");
+            System.out.println("Items in Satchel: " + getBagItemString() );
+        }
+
+        else {
+            System.out.println("There is no item!");
+            System.out.println("");
         }
     }
-    
+
+    public String getBagItemString()
+    {
+        String returnString = "";
+        Set<String> keys = bagItems.keySet();
+        for (String item : keys){
+            returnString += " " + item;
+        }
+        return returnString; 
+    }
+
+    private boolean fightZombies(Command command)
+    {
+        boolean quit = false; 
+        if(!command.hasSecondWord()) {
+            System.out.println("Fight who?");
+            return false;
+        }
+
+        if(command.getSecondWord().equalsIgnoreCase("zombies")) {
+
+            Object newItem = bagItems.get("nerfDarts");
+            
+
+            if (currentRoom.getZombieNumber() <=  nerfDarts.getNumberItems() ) {
+                System.out.println("You have defeated the zombies");
+                quit = false;
+            }
+
+            else {
+                System.out.println("The zombies have killed you");
+                quit = true;
+            }
+        }
+        return quit;
+    }
+
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
@@ -348,6 +392,5 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
-    
-    
+
 }
