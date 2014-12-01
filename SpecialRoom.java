@@ -1,5 +1,4 @@
-import java.util.Set;
-import java.util.HashMap;
+
 /**
  * Goodhue's SpecialRoom
  * 
@@ -10,17 +9,12 @@ import java.util.HashMap;
 public class SpecialRoom extends Room
 
 {
-    
-    private Object gurleyJersey;
-    //private HashMap<String, Object> bagItems; 
-    
     /**
      * Constructor for objects of class SpecialRoom
      */
     public SpecialRoom(String description)
     {
         super(description);
-        
     }
     public void press(Command command)
     {
@@ -29,12 +23,29 @@ public class SpecialRoom extends Room
             System.out.println("You swipe your ID and then a door " +
                 "slides open revealing a staircase.");
             Room creepyRoom = new Room("in a creepy room");
-            gurleyJersey = new Object("Gurley Jersey");
+<<<<<<< HEAD
+            gurleyJersey = new Object("gurleyJersey");
             setExit("down", creepyRoom);
             creepyRoom.setExit("up", this);
-            creepyRoom.setItem("Gurley Jersey", gurleyJersey);
+            creepyRoom.setItem("gurleyJersey", gurleyJersey);
+=======
+            setExit("down", creepyRoom);
+            creepyRoom.setExit("up", this);
+>>>>>>> parent of cafd844... Added items, zombies to Game Class
             changeDescription("in the Staff Room" +
             ". \nAn opening in the wall reveals a staircase leading down.");
+        }
+        else  if(command.getSecondWord().equals("case"))
+        
+        {
+            System.out.println("You open the case, and you see " +
+                "some stairs leading down..");
+            Room oarRoom = new Room("in a hallway with a shining light at the end of it."
+            + "Upon closer inspection, you see that the light is shining up the GA/FL Oar case");
+            setExit("downstairs", oarRoom);
+            oarRoom.setExit("up", this);
+            changeDescription("in the corridor" +
+            ".  \nThe GA/FL Oar case is open revealing a staircase leading down.");
         }
         
        
