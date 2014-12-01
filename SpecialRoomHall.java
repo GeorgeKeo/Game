@@ -1,4 +1,5 @@
-
+import java.util.Set;
+import java.util.HashMap;
 /**
  * Write a description of class SpecialRoomHall here.
  * 
@@ -16,12 +17,19 @@ public class SpecialRoomHall extends Room
         if(command.getSecondWord().equalsIgnoreCase("button"))
         
         {
-            System.out.println("The Oar shines with power!  /nThe gateway powers up!  /nDo you want to go through the gateway? ");
+            
+            
+            System.out.println("The Oar shines with power!  \nThe gateway powers up!  \nDo you want to go through the gateway? ");
             Room grandHall = new Room("are in the Grand Hall! "
-            + "/nThe Gator Hater machine is running in the middle of the room");
+            + "\nThe Gator Hater machine is running in the middle of the room");
             setExit("through", grandHall);
             changeDescription("in the hallway" +
             ".  \nThe portal is running.");
+           
+           
+               
+            
+        
         }
         else
         {

@@ -35,6 +35,7 @@ public class Game
     private Object flashlight, dawgTreats, nerfDarts;
     private Object newItem, stockedItem;
     private HashMap<String, Object> bagItems; 
+    public boolean gotOar = false , gotJersey = false;
 
     /**
      * Create the game and initialise its internal map.
@@ -98,6 +99,7 @@ public class Game
         eastStudyRoom.setExit("east", smokingArea);
         eastStudyRoom.setExit("west", corridor);
         eastStudyRoom.setItem("dogtreat", dawgTreats);
+        eastStudyRoom.setTreat(rng());
 
         smokingArea.setExit("north", mezzanine);
         smokingArea.setExit("west", eastStudyRoom);
@@ -109,6 +111,7 @@ public class Game
         corridor.setExit("west", westWing);
         corridor.setZombies(3);
         corridor.setItem("dogtreat", dawgTreats);
+        corridor.setTreat(rng());
 
         westWing.setExit("east", corridor);
         westWing.setItem("nerfdarts", nerfDarts);
@@ -140,6 +143,7 @@ public class Game
         tateEntrance2.setExit("west", seHall);
         tateEntrance2.setExit("north", tateEntrance1);
         tateEntrance2.setItem("dogtreat", dawgTreats);
+        tateEntrance2.setTreat(rng()+ 4);
 
         neHall.setExit("south", seHall);
         neHall.setExit("east", tateEntrance1);
@@ -171,6 +175,7 @@ public class Game
 
         hallway.setExit("north", cafe2);
         hallway.setItem("dogtreat", dawgTreats);
+        hallway.setTreat(rng());
 
         //Tate 3rd Floor
 
@@ -181,6 +186,7 @@ public class Game
 
         tateCafe.setExit("south", atrium);
         tateCafe.setItem("dogtreat", dawgTreats);
+        tateCafe.setTreat(rng());
 
         tateCorridor.setExit("west", atrium);
         tateCorridor.setExit("east", informationDesk);
@@ -192,6 +198,7 @@ public class Game
         bulldogCafe.setExit("south", informationDesk);
         bulldogCafe.setExit("east", theater);
         bulldogCafe.setItem("dogtreat", dawgTreats);
+        bulldogCafe.setTreat(rng()+ 5);
 
         theater.setExit("west", bulldogCafe);
         theater.setItem("nerfdarts", nerfDarts);
@@ -294,8 +301,13 @@ public class Game
             System.out.println(currentRoom.getLongDescription());
         }
         else if (commandWord.equals("push")) {
-            currentRoom.press(command);
-            System.out.println(currentRoom.getLongDescription());
+            if (gotOar == true){
+                currentRoom.press(command);
+                System.out.println(currentRoom.getLongDescription());
+            }
+            else{
+                System.out.println("The gateway fails to power up. \nPerhaps having a powerful item will help.");
+            }
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
@@ -355,11 +367,28 @@ public class Game
         }
 
         else{
-            
+             if (command.getSecondWord().equalsIgnoreCase("nerfdarts")){
                 bagDarts = currentRoom.getDartNumber() + bagDarts;
                 currentRoom.setDart(0);
                 System.out.println("You have " + bagDarts + " nerf darts.");
                 currentRoom.items.remove(command.getSecondWord());
+            }
+            else if (command.getSecondWord().equalsIgnoreCase("dogtreat")){
+                bagTreats = currentRoom.getTreatNumber() + bagTreats;
+                currentRoom.setTreat(0);
+                System.out.println("You have " + bagTreats + " treats.");
+                currentRoom.items.remove(command.getSecondWord());
+            }
+            else if (currentRoom.getItemName().equalsIgnoreCase("Oar") && command.getSecondWord().equalsIgnoreCase("Oar")){
+                gotOar = true;
+                currentRoom.items.remove(command.getSecondWord());
+                System.out.println("You have gotten the Oar!");
+            }
+            else if (currentRoom.getItemName().equalsIgnoreCase("Jersey") && command.getSecondWord().equalsIgnoreCase("Jersey")){
+                gotJersey = true;
+                currentRoom.items.remove(command.getSecondWord());
+                System.out.println("You have gotten the Jersey!");
+            }
         }
 
     }
@@ -453,5 +482,6 @@ public class Game
        return randomInt + 1;
        
    }
-
+   
+  
 }

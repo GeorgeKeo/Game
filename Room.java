@@ -192,6 +192,22 @@ public class Room
         return darts.getNumber();
     }
 
+    public void setTreat(int number)
+    {
+        treats = new Creature("treat", number);
+    }
+    
+    public void resetTreat()
+    {
+        treats.setNumber(0);
+    }
+    
+    public int getTreatNumber()
+    {
+        return treats.getNumber();
+    }
+    
+    
 
 }
 

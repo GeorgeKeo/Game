@@ -1,4 +1,5 @@
-
+import java.util.Set;
+import java.util.HashMap;
 /**
  * Write a description of class SpecialRoomOar here.
  * 
@@ -28,12 +29,16 @@ public class SpecialRoomOar extends Room
                     + "Upon closer inspection, you see that the light is shining from"
                     + "the GA/FL Oar case"
                     + "There is a sign above it, reading 'no fighting in the Oar Room'");
-            oar = new Object ("GAFLOar");	 
+            oar = new Object ("Oar");	 
             setExit("down", oarRoom);
-            oarRoom.setItem("GAFLOar", oar);
             oarRoom.setExit("up", this);
+            oarRoom.setItem("Oar", oar);
             changeDescription("in the corridor" +
                 ".  \nThe GA/FL Oar case is open revealing a staircase leading down.");
+        }
+        else
+        {
+            super.press(command);
         }
     }
 }
