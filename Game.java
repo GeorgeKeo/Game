@@ -37,7 +37,8 @@ public class Game
     private HashMap<String, Object> bagItems; 
     public boolean gotOar = false , gotJersey = false;
     private int bcount = 0;
-    
+    boolean finished = false;
+    boolean wantToQuit = false;
 
     /**
      * Create the game and initialise its internal map.
@@ -223,7 +224,7 @@ public class Game
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
 
-        boolean finished = false;
+        
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
@@ -238,7 +239,6 @@ public class Game
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
 
-        boolean finished = false;
         while (! finished) {
             Command command = parserWithFileInput.getCommand();
             finished = processCommand(command);
@@ -275,7 +275,7 @@ public class Game
      */
     private boolean processCommand(Command command) 
     {
-        boolean wantToQuit = false;
+        
 
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
@@ -295,7 +295,7 @@ public class Game
         }
         else if (commandWord.equals("fight")) {
             fightZombies(command);
-            wantToQuit = fightZombies(command);
+            
         }
         else if (commandWord.equals("swipe")) {
             currentRoom.press(command);
@@ -378,6 +378,11 @@ public class Game
                     System.out.println(currentRoom.getLongDescription());
                 }
         }
+        else if (currentRoom.getZombieNumber() > 0)
+        {
+            System.out.println("As you turn to leave, a zombie attacks you from behind. \nYou are dead.");
+            wantToQuit = true;
+        }
         else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
@@ -456,12 +461,12 @@ public class Game
 
     }
 
-    private boolean fightZombies(Command command)
+    private void fightZombies(Command command)
     {
-        boolean quit = false; 
+        
         if(!command.hasSecondWord()) {
             System.out.println("Fight who?");
-            quit =  false;
+            return;
         }
 
         if(command.getSecondWord().equalsIgnoreCase("zombies")) {
@@ -475,15 +480,15 @@ public class Game
                 currentRoom.setZombies(0);
                 System.out.println(currentRoom.getLongDescription());
                 
-                quit = false;
+                
             }
 
             else {
                 System.out.println("The zombies have killed you");
-                quit = true;
+                wantToQuit = true;
             }
         }
-        return quit;
+       
     }
 
     /** 
