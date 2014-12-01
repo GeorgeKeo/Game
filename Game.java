@@ -36,6 +36,8 @@ public class Game
     private Object newItem, stockedItem;
     private HashMap<String, Object> bagItems; 
     public boolean gotOar = false , gotJersey = false;
+    private int bcount = 0;
+    
 
     /**
      * Create the game and initialise its internal map.
@@ -305,8 +307,13 @@ public class Game
         }
         else if (commandWord.equals("push")) {
             if (gotOar == true){
+                if(bagTreats > 20){
                 currentRoom.press(command);
                 System.out.println(currentRoom.getLongDescription());
+                }
+                else{
+                    System.out.println("The gateway fails to power up. \nPerhaps having more treats will help.");
+                }
             }
             else{
                 System.out.println("The gateway fails to power up. \nPerhaps having a powerful item will help.");
@@ -346,7 +353,7 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-
+        
         String direction = command.getSecondWord();
 
         // Try to leave current room.
@@ -354,6 +361,22 @@ public class Game
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
+        }
+        else if (bcount == 0 && currentRoom == bridge && nextRoom == tateEntrance1)
+        {
+               if (gotJersey == false){
+                   nextRoom = smokingArea;
+                   System.out.println( "You see zombie Tim Tebow on the bridge. \nHe sees you and rushes towards you screaming 'YOU ARE UNPREPARED'. \nYou are are pushed back to the smoking area.");
+                   currentRoom = nextRoom;
+                   System.out.println(currentRoom.getLongDescription());
+                }
+                else
+                {
+                    System.out.println("You see zombie Tim Tebow on the bridge. \nHe sees you and rushes towards you screaming 'YOU ARE UNPREPARED'. \nYour Georgia jersey repells Tebow, staggering him. \nDisoriented, he falls off the bridge.");
+                    bcount = 5;
+                    currentRoom = nextRoom;
+                    System.out.println(currentRoom.getLongDescription());
+                }
         }
         else {
             currentRoom = nextRoom;
@@ -380,6 +403,7 @@ public class Game
                 bagTreats = currentRoom.getTreatNumber() + bagTreats;
                 currentRoom.setTreat(0);
                 System.out.println("You have " + bagTreats + " treats.");
+                System.out.println("You feel power rush through you.");
                 currentRoom.items.remove(command.getSecondWord());
             }
             else if (currentRoom.getItemName().equalsIgnoreCase("Oar") && command.getSecondWord().equalsIgnoreCase("Oar")){
@@ -486,5 +510,6 @@ public class Game
        
    }
    
+ 
   
 }
