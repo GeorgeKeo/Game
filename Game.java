@@ -30,7 +30,7 @@ public class Game
     private Room staircase, cafe2, hallway;
     private Room atrium, tateCafe, tateCorridor, informationDesk, bulldogCafe, theater;
     private ParserWithFileInput parserWithFileInput;
-
+    private int bagDarts, bagTreats;
     private Object flashlight, dawgTreats, nerfDarts;
     private Object newItem, stockedItem;
     private HashMap<String, Object> bagItems; 
@@ -71,7 +71,7 @@ public class Game
         seHall = new Room("in the South East Hall of Tate");
         staircase = new Room("at the staircase on the 4th floor of Tate");
         cafe2 = new Room("at the cafe on the 4th floor of Tate");
-        hallway = new SpecialRoomOar("in the hallway on the 4th floor of Tate. There are many empty classrooms around you.");
+        hallway = new SpecialRoomHall("in the hallway on the 4th floor of Tate. There are many empty classrooms around you.");
         atrium = new Room("in the atrium on the main floor of Tate.");
         tateCafe = new Room("in by the Tate Cafe.");
 
@@ -91,7 +91,7 @@ public class Game
         jitteryJoes.setExit("north", cafe);
         //jitteryJoes.setItem("flashlight", flashlight);
         jitteryJoes.setItem("nerfdarts", nerfDarts);
-        nerfDarts.setNumber(5);
+        jitteryJoes.setDart(5);
 
         eastStudyRoom.setExit("north", jitteryJoes);
         eastStudyRoom.setExit("east", smokingArea);
@@ -102,7 +102,7 @@ public class Game
         smokingArea.setExit("west", eastStudyRoom);
         smokingArea.setExit("south", bridge);
         smokingArea.setItem("nerfdarts", nerfDarts);
-        nerfDarts.setNumber(1);
+        smokingArea.setDart(1);
 
         corridor.setExit("east", eastStudyRoom);
         corridor.setExit("west", westWing);
@@ -111,7 +111,7 @@ public class Game
 
         westWing.setExit("east", corridor);
         westWing.setItem("nerfdarts", nerfDarts);
-        nerfDarts.setNumber(4);
+        westWing.setDart(4);
 
         cafe.setExit("south", jitteryJoes);
         cafe.setExit("north", northEntrance);
@@ -119,7 +119,7 @@ public class Game
 
         northEntrance.setExit("south", cafe);
         northEntrance.setItem("nerfdarts", nerfDarts);
-        nerfDarts.setNumber(4);
+        northEntrance.setDart(4);
 
         mezzanine.setExit("south", smokingArea);
         mezzanine.setExit("north", staffRoom);
@@ -359,10 +359,10 @@ public class Game
         }
 
         else{
-            if(command.getSecondWord().equalsIgnoreCase("nerfdarts")){
-               
-            }
             
+                bagDarts = currentRoom.getDartNumber() + bagDarts;
+                currentRoom.setDart(0);
+                System.out.println("You have " + bagDarts + " nerf darts.");
         }
 
     }
@@ -415,10 +415,13 @@ public class Game
 
             Object newItem = bagItems.get("nerfDarts");
 
-            if (currentRoom.getZombieNumber() <=  nerfDarts.getNumberItems() ) {
+            if (currentRoom.getZombieNumber() <=  bagDarts ) {
                 System.out.println("You have defeated the zombies");
+                bagDarts = bagDarts - currentRoom.getZombieNumber();
+                System.out.println(bagDarts);
                 currentRoom.setZombies(0);
                 System.out.println(currentRoom.getLongDescription());
+                
                 quit = false;
             }
 

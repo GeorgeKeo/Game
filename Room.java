@@ -20,9 +20,8 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
     private HashMap<String, Object> items;
-    private Creature zombies;
-    private int nerfDarts;
-    private int dawgTreats;
+    private Creature zombies, darts, treats;
+    
 
     /**
      * Create a room described "description". Initially, it has
@@ -36,8 +35,7 @@ public class Room
         exits = new HashMap<String, Room>();
         items = new HashMap<String, Object>();
         zombies = new Creature ("zombie", 0);
-        nerfDarts = 0;
-        dawgTreats = 0; 
+       
     }
 
     /**
@@ -179,25 +177,21 @@ public class Room
         return zombies.getNumber();
     }
 
+    public void setDart(int number)
+    {
+        darts = new Creature("dart", number);
+    }
+    
+    public void resetDart()
+    {
+        darts.setNumber(0);
+    }
+    
     public int getDartNumber()
     {
-        return nerfDarts;
+        return darts.getNumber();
     }
-    
-    public void setDartNumber(int number)
-    {
-        nerfDarts = number;
-    }
-    
-    public int getTreatsNumber()
-    {
-        return dawgTreats;
-    }
-    
-    public void setTreatsNumber(int number)
-    {
-        dawgTreats = number;
-    }
-    
+
+
 }
 
