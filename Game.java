@@ -101,19 +101,31 @@ public class Game
         smokingArea.setExit("north", mezzanine);
         smokingArea.setExit("west", eastStudyRoom);
         smokingArea.setExit("south", bridge);
+        smokingArea.setItem("nerfdarts", nerfDarts);
+        nerfDarts.setNumber(1);
 
         corridor.setExit("east", eastStudyRoom);
         corridor.setExit("west", westWing);
+        corridor.setZombies(3);
+        corridor.setItem("dogtreat", dawgTreats);
 
         westWing.setExit("east", corridor);
+        westWing.setItem("nerfdarts", nerfDarts);
+        nerfDarts.setNumber(4);
 
         cafe.setExit("south", jitteryJoes);
         cafe.setExit("north", northEntrance);
         cafe.setZombies(6);
+        
 
         northEntrance.setExit("south", cafe);
+        northEntrance.setItem("nerfdarts", nerfDarts);
+        nerfDarts.setNumber(4);
+        
         mezzanine.setExit("south", smokingArea);
         mezzanine.setExit("north", staffRoom);
+        mezzanine.setZombies(1);
+        
 
         staffRoom.setExit("south", mezzanine);
 
@@ -125,9 +137,11 @@ public class Game
         tateEntrance1.setExit("north", bridge);
         tateEntrance1.setExit("west", neHall);
         tateEntrance1.setExit("south", tateEntrance2);
+        tateEntrance1.setZombies(3);
 
         tateEntrance2.setExit("west", seHall);
         tateEntrance2.setExit("north", tateEntrance1);
+        tateEntrance2.setItem("dogtreat", dawgTreats);
 
         neHall.setExit("south", seHall);
         neHall.setExit("east", tateEntrance1);
@@ -136,9 +150,12 @@ public class Game
 
         nwHall.setExit("east", neHall);
         nwHall.setExit("south", swHall);
+        nwHall.setItem("nerfdarts", nerfDarts);
+        nerfDarts.setNumber(3);
 
         swHall.setExit("north", nwHall);
         swHall.setExit("east", seHall);
+        swHall.setZombies(2);
 
         seHall.setExit("west", swHall);
         seHall.setExit("north", neHall);
@@ -148,35 +165,42 @@ public class Game
 
         staircase.setExit("east", cafe2);
         staircase.setExit("upstairs", neHall);
+        staircase.setZombies(2);
 
         cafe2.setExit("west", staircase);
         cafe2.setExit("south", hallway);
         cafe2.setExit("downstairs", atrium);
 
         hallway.setExit("north", cafe2);
+        hallway.setItem("dogtreat", dawgTreats);
 
         //Tate 3rd Floor
 
         atrium.setExit("upstairs", cafe2);
         atrium.setExit("north", tateCafe);
         atrium.setExit("east", tateCorridor);
+        atrium.setZombies(2);
 
         tateCafe.setExit("south", atrium);
+        tateCafe.setItem("dogtreat", dawgTreats);
 
         tateCorridor.setExit("west", atrium);
         tateCorridor.setExit("east", informationDesk);
-
+        
         informationDesk.setExit("west", tateCorridor);
         informationDesk.setExit("north", bulldogCafe);
+        informationDesk.setZombies(4);
 
         bulldogCafe.setExit("south", informationDesk);
         bulldogCafe.setExit("east", theater);
+        bulldogCafe.setItem("dogtreat", dawgTreats);
 
-        theater.setExit("west", bulldogCafe);       
-
+        theater.setExit("west", bulldogCafe);
+        theater.setItem("nerfdarts", nerfDarts);
+        nerfDarts.setNumber(10);
 
         currentRoom = jitteryJoes;  // start game jitteryJoes
-       ;
+        ;
     }
 
     /**
@@ -222,8 +246,13 @@ public class Game
         System.out.println("You sit up and realize you are at Jittery Joes inside of the MLC");
         System.out.println("But something is different...everything seems...post-apocolyptic.");
         System.out.println("You see the words 'Gator Hater' written in blood on the wall but that makes no sense to you");
+        System.out.println("A figure resembling Herschel Walker approaches you in a hooded cloak, and helps you stand up");
+        System.out.println("He tells you the terrible atrocities that have occurred since you passed out while studying late in the MLC");
+        System.out.println("The evil Will Muschamp has invaded Athens with his group of 'football players' and has created a machine");
+        System.out.println("that creates a poisonous version of Gatorade called ZombieAde, and turns humans into zombies!");
+        System.out.println("You must find the machine that is on campus and put an end to this terrible deed");       
 
-        System.out.println("You stand up and decide it is time to start your journey...");
+        System.out.println("You stand up and decide it is time to start your journey..");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -362,7 +391,6 @@ public class Game
         if(command.getSecondWord().equalsIgnoreCase("zombies")) {
 
             Object newItem = bagItems.get("nerfDarts");
-            
 
             if (currentRoom.getZombieNumber() <=  nerfDarts.getNumberItems() ) {
                 System.out.println("You have defeated the zombies");
