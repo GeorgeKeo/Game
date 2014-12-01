@@ -10,7 +10,7 @@ public class Stopwatch {
         //Scanner sc = new Scanner(System.in);
         int sc = 100;
         // System.out.print("Input seconds => : ");
-        String secs = "100";
+        String secs = "600";
         int delay = 1000;
         int period = 1000;
         timer = new Timer();

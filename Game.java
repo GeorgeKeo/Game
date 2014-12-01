@@ -105,7 +105,7 @@ public class Game
         smokingArea.setExit("west", eastStudyRoom);
         smokingArea.setExit("south", bridge);
         smokingArea.setItem("nerfdarts", nerfDarts);
-        smokingArea.setDart(rng());
+        smokingArea.setDart(rng()+1);
 
         corridor.setExit("east", eastStudyRoom);
         corridor.setExit("west", westWing);
@@ -119,7 +119,7 @@ public class Game
 
         cafe.setExit("south", jitteryJoes);
         cafe.setExit("north", northEntrance);
-        cafe.setZombies(6);
+        cafe.setZombies(2);
 
         northEntrance.setExit("south", cafe);
         northEntrance.setItem("nerfdarts", nerfDarts);
@@ -138,7 +138,7 @@ public class Game
         tateEntrance1.setExit("north", bridge);
         tateEntrance1.setExit("west", neHall);
         tateEntrance1.setExit("south", tateEntrance2);
-        tateEntrance1.setZombies(3);
+        tateEntrance1.setZombies(2);
 
         tateEntrance2.setExit("west", seHall);
         tateEntrance2.setExit("north", tateEntrance1);
@@ -153,11 +153,11 @@ public class Game
         nwHall.setExit("east", neHall);
         nwHall.setExit("south", swHall);
         nwHall.setItem("nerfdarts", nerfDarts);
-        nwHall.setDart(rng());
+        nwHall.setDart(rng()+2);
 
         swHall.setExit("north", nwHall);
         swHall.setExit("east", seHall);
-        swHall.setZombies(2);
+        swHall.setZombies(3);
 
         seHall.setExit("west", swHall);
         seHall.setExit("north", neHall);
@@ -172,17 +172,19 @@ public class Game
         cafe2.setExit("west", staircase);
         cafe2.setExit("south", hallway);
         cafe2.setExit("downstairs", atrium);
+        cafe2.setItem("nerfdarts", nerfDarts);
+        cafe2.setDart(rng());
 
         hallway.setExit("north", cafe2);
         hallway.setItem("dogtreat", dawgTreats);
-        hallway.setTreat(rng());
+        hallway.setTreat(rng()+2);
 
         //Tate 3rd Floor
 
         atrium.setExit("upstairs", cafe2);
         atrium.setExit("north", tateCafe);
         atrium.setExit("east", tateCorridor);
-        atrium.setZombies(2);
+        atrium.setZombies(1);
 
         tateCafe.setExit("south", atrium);
         tateCafe.setItem("dogtreat", dawgTreats);
@@ -193,7 +195,7 @@ public class Game
 
         informationDesk.setExit("west", tateCorridor);
         informationDesk.setExit("north", bulldogCafe);
-        informationDesk.setZombies(4);
+        informationDesk.setZombies(3);
 
         bulldogCafe.setExit("south", informationDesk);
         bulldogCafe.setExit("east", theater);
@@ -284,6 +286,7 @@ public class Game
         }
         else if (commandWord.equals("go")) {
             goRoom(command);
+            
         }
         else if (commandWord.equals("grab")){
             grabItem(command);
