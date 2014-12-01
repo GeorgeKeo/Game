@@ -356,7 +356,7 @@ public class Game
         boolean quit = false; 
         if(!command.hasSecondWord()) {
             System.out.println("Fight who?");
-            return false;
+            quit =  false;
         }
 
         if(command.getSecondWord().equalsIgnoreCase("zombies")) {

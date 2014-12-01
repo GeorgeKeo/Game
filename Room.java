@@ -63,10 +63,21 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString() + ".\n" 
-                + getItemString() + ".\n" + getZombieString();
+        String longDesc = "";
+        if( getZombieNumber() <= 0)
+        {
+            longDesc = "You are " + description + ".\n" + getExitString() + ".\n" + getItemString() + ".\n" + getZombieString();
+        }
+        
+        if(getZombieNumber() > 0)
+        {
+            longDesc = "You are " + description +  ".\n" + getItemString() + ".\n" + getZombieString();
+        }
+        
+        return longDesc;
+        
     }
-
+    
     /**
      * Return a string describing the room's exits, for example
      * "Exits: north west".
@@ -91,13 +102,13 @@ public class Room
         }
         return returnString; 
     }
-    
+
     public String getZombieString()
     {
         if(zombies == null){
             return ("There are no zombies in this room.");
         }
-        
+
         else {
             return ("There are " + zombies.getNumber() + " zombies in the room.");
         }
@@ -143,17 +154,16 @@ public class Room
     {
         items.put(name, item);
     }
-    
+
     public void setZombies(int number)
     {
         zombies = new Creature("zombie", number);
     }
-    
+
     public int getZombieNumber()
     {
         return zombies.getNumber();
     }
-    
-}
 
+}
 
