@@ -359,6 +359,7 @@ public class Game
                 bagDarts = currentRoom.getDartNumber() + bagDarts;
                 currentRoom.setDart(0);
                 System.out.println("You have " + bagDarts + " nerf darts.");
+                currentRoom.items.remove(command.getSecondWord());
         }
 
     }

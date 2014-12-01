@@ -19,7 +19,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
-    private HashMap<String, Object> items;
+    public HashMap<String, Object> items;
     private Creature zombies, darts, treats;
     
 
