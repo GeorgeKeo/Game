@@ -358,32 +358,11 @@ public class Game
             return;
         }
 
-        String name = command.getSecondWord();
-        newItem = new Object(currentRoom.getItemName());
-        //String stockItemName = bagItems.get(newItem);
-        stockedItem = new Object(findItem(name));
-        int number = newItem.getNumberItems();
-
-        if (currentRoom.getItemName().equalsIgnoreCase(name)){
-            if(newItem.getName().equalsIgnoreCase(stockedItem.getName()))
-            {
-                updateItemNumber(name, number);
-                System.out.println("Number of items updated");
-                System.out.println("");
-                System.out.println("Items in Satchel: " + getBagItemString());
+        else{
+            if(command.getSecondWord().equalsIgnoreCase("nerfdarts")){
+               
             }
-
-            if(newItem != stockedItem)
-            {
-                bagItems.put(name, newItem);
-                System.out.println("Item added to Satchel");
-                System.out.println("");
-                System.out.println("Items in Satchel: " + getBagItemString() );
-            }
-        }
-        else {
-            System.out.println("There is no item!");
-            System.out.println("");
+            
         }
 
     }
@@ -438,6 +417,8 @@ public class Game
 
             if (currentRoom.getZombieNumber() <=  nerfDarts.getNumberItems() ) {
                 System.out.println("You have defeated the zombies");
+                currentRoom.setZombies(0);
+                System.out.println(currentRoom.getLongDescription());
                 quit = false;
             }
 
