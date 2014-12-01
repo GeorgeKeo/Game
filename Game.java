@@ -32,7 +32,7 @@ public class Game
     private ParserWithFileInput parserWithFileInput;
 
     private Object flashlight, dawgTreats, nerfDarts;
-    private Object newItem;
+    private Object newItem, stockedItem;
     private HashMap<String, Object> bagItems; 
 
     /**
@@ -116,19 +116,16 @@ public class Game
         cafe.setExit("south", jitteryJoes);
         cafe.setExit("north", northEntrance);
         cafe.setZombies(6);
-        
 
         northEntrance.setExit("south", cafe);
         northEntrance.setItem("nerfdarts", nerfDarts);
         nerfDarts.setNumber(4);
-        
+
         mezzanine.setExit("south", smokingArea);
         mezzanine.setExit("north", staffRoom);
         mezzanine.setZombies(1);
-        
 
         staffRoom.setExit("south", mezzanine);
-
         bridge.setExit("south", tateEntrance1);
         bridge.setExit("north", mezzanine);
 
@@ -186,7 +183,7 @@ public class Game
 
         tateCorridor.setExit("west", atrium);
         tateCorridor.setExit("east", informationDesk);
-        
+
         informationDesk.setExit("west", tateCorridor);
         informationDesk.setExit("north", bulldogCafe);
         informationDesk.setZombies(4);
@@ -198,6 +195,12 @@ public class Game
         theater.setExit("west", bulldogCafe);
         theater.setItem("nerfdarts", nerfDarts);
         nerfDarts.setNumber(10);
+
+        theater.setExit("west", bulldogCafe);
+        theater.setItem("nerfdarts", nerfDarts);
+        nerfDarts.setNumber(10);
+
+
 
         currentRoom = jitteryJoes;  // start game jitteryJoes
         ;
@@ -284,6 +287,7 @@ public class Game
         }
         else if (commandWord.equals("fight")) {
             fightZombies(command);
+            wantToQuit = fightZombies(command);
         }
         else if (commandWord.equals("swipe")) {
             currentRoom.press(command);
@@ -356,18 +360,40 @@ public class Game
 
         String name = command.getSecondWord();
         newItem = new Object(currentRoom.getItemName());
+        //String stockItemName = bagItems.get(newItem);
+        stockedItem = new Object(findItem(name));
+        int number = newItem.getNumberItems();
 
         if (currentRoom.getItemName().equalsIgnoreCase(name)){
-            bagItems.put(name, newItem);
-            System.out.println("Item added to Satchel");
-            System.out.println("");
-            System.out.println("Items in Satchel: " + getBagItemString() );
-        }
+            if(newItem.getName().equalsIgnoreCase(stockedItem.getName()))
+            {
+                updateItemNumber(name, number);
+                System.out.println("Number of items updated");
+                System.out.println("");
+                System.out.println("Items in Satchel: " + getBagItemString());
+            }
 
+            if(newItem != stockedItem)
+            {
+                bagItems.put(name, newItem);
+                System.out.println("Item added to Satchel");
+                System.out.println("");
+                System.out.println("Items in Satchel: " + getBagItemString() );
+            }
+        }
         else {
             System.out.println("There is no item!");
             System.out.println("");
         }
+
+    }
+
+    private void updateItemNumber(String name, int number)
+    {
+        Object updateItem = bagItems.get(name);
+        int numb = updateItem.getNumberItems() + number;
+
+        updateItem.setNumber(numb);
     }
 
     public String getBagItemString()
@@ -375,9 +401,27 @@ public class Game
         String returnString = "";
         Set<String> keys = bagItems.keySet();
         for (String item : keys){
-            returnString += " " + item;
+            Object holdItem = new Object (item);
+            int number = holdItem.getNumberItems();
+            returnString += " " + item +    " " + number ;
         }
         return returnString; 
+    }
+
+    public String findItem(String name)
+    {
+
+        String returnString = "";
+        Set<String> keys = bagItems.keySet();
+        for (String item : keys){
+            Object holdItem = new Object (item);
+            if( name.equalsIgnoreCase(holdItem.getName()));
+            {
+                returnString +=  item;
+            }
+        }
+        return returnString; 
+
     }
 
     private boolean fightZombies(Command command)

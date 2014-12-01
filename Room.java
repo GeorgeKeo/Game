@@ -66,7 +66,7 @@ public class Room
         String longDesc = "";
         if( getZombieNumber() <= 0)
         {
-            longDesc = "You are " + description + ".\n" + getExitString() + ".\n" + getItemString() + ".\n" + getZombieString();
+            longDesc = "You are " + description + ".\n" + getExitString() + ".\n" + getItemString() + " " +  ".\n" + getZombieString();
         }
         
         if(getZombieNumber() > 0)

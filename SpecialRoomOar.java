@@ -25,11 +25,12 @@ public class SpecialRoomOar extends Room
                 "some stairs leading down..");
 
             Room oarRoom = new Room("in a hallway with a shining light at the end of it."
-                    + "Upon closer inspection, you see that the light is shining up the GA/FL Oar case"
+                    + "Upon closer inspection, you see that the light is shining from"
+                    + "the GA/FL Oar case"
                     + "There is a sign above it, reading 'no fighting in the Oar Room'");
-            oar = new Object ("GA/FL Oar");	 
-            setExit("downstairs", oarRoom);
-            oarRoom.setItem("GA/FL Oar", oar);
+            oar = new Object ("GAFLOar");	 
+            setExit("down", oarRoom);
+            oarRoom.setItem("GAFLOar", oar);
             oarRoom.setExit("up", this);
             changeDescription("in the corridor" +
                 ".  \nThe GA/FL Oar case is open revealing a staircase leading down.");

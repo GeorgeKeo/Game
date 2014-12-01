@@ -29,10 +29,10 @@ public class SpecialRoom extends Room
             System.out.println("You swipe your ID and then a door " +
                 "slides open revealing a staircase.");
             Room creepyRoom = new Room("in a creepy room");
-            gurleyJersey = new Object("gurleyJersey");
+            gurleyJersey = new Object("Jersey");
             setExit("down", creepyRoom);
             creepyRoom.setExit("up", this);
-            creepyRoom.setItem("gurleyJersey", gurleyJersey);
+            creepyRoom.setItem("Jersey", gurleyJersey);
             changeDescription("in the Staff Room" +
             ". \nAn opening in the wall reveals a staircase leading down.");
         }
