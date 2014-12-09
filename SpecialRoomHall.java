@@ -26,6 +26,7 @@ public class SpecialRoomHall extends Room
             "\nYou quickly eat the dogtreats." + "\n'Wait! NO! What are you doing!?', Muschamp panicks." + "\nYou are full of power, you swing the Oar at Muschamp,  instantly vaporizing him!" + 
             "\nMuschamp has been defeated! the machine malfunctions from lack of sustaining power and bursts into flames"
             + "\nCongratulations! You have won!!");
+            
             setExit("through", grandHall);
             changeDescription("in the hallway" +
             ".  \nThe portal is running.");

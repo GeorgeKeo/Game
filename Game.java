@@ -37,7 +37,7 @@ public class Game
     private HashMap<String, Object> bagItems; 
     public boolean gotOar = false , gotJersey = false;
     private int bcount = 0;
-    boolean finished = false;
+    public boolean finished = false;
     boolean wantToQuit = false;
 
     /**
@@ -70,13 +70,13 @@ public class Game
         bridge = new Room("on the bridge between Tate and MLC. Seems a little shaky...");
         tateEntrance1 = new Room("at the first entrance of Tate");
         tateEntrance2 = new Room("at the second entrance of Tate");
-        neHall = new Room("in the North East Hall of Tate");
-        nwHall = new Room("in the North West Hall of Tate");
-        swHall = new Room("in the South West Hall of Tate");
-        seHall = new Room("in the South East Hall of Tate");
+        neHall = new Room("in the North East Hall of Tate, the doors of the Grand Hall are barracaded");
+        nwHall = new Room("in the North West Hall of Tate, the doors of the Grand Hall are barracaded");
+        swHall = new Room("in the South West Hall of Tate, the doors of the Grand Hall are barracaded");
+        seHall = new Room("in the South East Hall of Tate, the doors of the Grand Hall are barracaded");
         staircase = new Room("at the staircase on the 4th floor of Tate");
         cafe2 = new Room("at the cafe on the 4th floor of Tate");
-        hallway = new SpecialRoomHall("in the hallway on the 4th floor of Tate. There are many empty classrooms around you.");
+        hallway = new SpecialRoomHall("in the hallway on the 4th floor of Tate. There are many empty classrooms around you.\nThere is a teleportation gate with a button beside it. You wonder where the gate leads to.");
         atrium = new Room("in the atrium on the main floor of Tate.");
         tateCafe = new Room("in by the Tate Cafe.");
 
@@ -476,7 +476,7 @@ public class Game
             if (currentRoom.getZombieNumber() <=  bagDarts ) {
                 System.out.println("You have defeated the zombies");
                 bagDarts = bagDarts - currentRoom.getZombieNumber();
-                System.out.println(bagDarts);
+                System.out.println("You have " + bagDarts + " left");
                 currentRoom.setZombies(0);
                 System.out.println(currentRoom.getLongDescription());
                 
